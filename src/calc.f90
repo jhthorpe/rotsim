@@ -749,6 +749,24 @@ SUBROUTINE calc_Heff(nvib,voff,nstates,l2h,states,phi2,&
     WRITE(*,*) 
     WRITE(*,*)
   END DO
+
+  WRITE(*,*) "Effective B matrix (cm-1)"
+  WRITE(*,*)
+  DO a=0,2
+    WRITE(*,'(2x,A1,2x,A5)') xyz(a),"(cm-1)"
+    WRITE(*,*) "---------------------------------------------------------------------"
+    DO n=0,nstates-1
+      IF (n .LT. 9) THEN
+        WRITE(label,'(A1,I1)') "s",n+1
+      ELSE
+        WRITE(label,'(A1,I2)') "s",n+1
+      END IF
+      WRITE(*,'(1x,A3)',ADVANCE='no') TRIM(label)
+      WRITE(*,'(1x,999(F11.8,2x))') Beff(n,0:nstates-1,a)
+    END DO
+    WRITE(*,*) 
+    WRITE(*,*)
+  END DO
   
   
 END SUBROUTINE calc_Heff
